@@ -51,14 +51,18 @@ func (c Config) DownloadDir() string {
 	return ExpandTilde(c.General.DownloadDir)
 }
 
-// Path returns the default path to the configuration file:
-// ~/.config/wallf/config.toml
+// Path returns the default path to the configuration file.
+// Respects $XDG_CONFIG_HOME, falls back to ~/.config/wallf/config.toml.
 func Path() string {
-	home, err := os.UserHomeDir()
-	if err != nil {
-		return ""
+	configDir := os.Getenv("XDG_CONFIG_HOME")
+	if configDir == "" {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return ""
+		}
+		configDir = filepath.Join(home, ".config")
 	}
-	return filepath.Join(home, ".config", "wallf", "config.toml")
+	return filepath.Join(configDir, "wallf", "config.toml")
 }
 
 // Exists reports whether the configuration file at Path() exists.

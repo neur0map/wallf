@@ -22,13 +22,37 @@ Built as part of [I.A.M](https://github.com/neur0map/project-i-a-m) — an opini
 
 ## Install
 
+### Binary (recommended)
+
+Grab a prebuilt binary from [releases](https://github.com/neur0map/wallf/releases):
+
+```
+# linux amd64
+curl -L https://github.com/neur0map/wallf/releases/latest/download/wallf_linux_amd64.tar.gz | tar xz
+sudo mv wallf /usr/local/bin/
+
+# linux arm64
+curl -L https://github.com/neur0map/wallf/releases/latest/download/wallf_linux_arm64.tar.gz | tar xz
+sudo mv wallf /usr/local/bin/
+
+# macOS (Apple Silicon)
+curl -L https://github.com/neur0map/wallf/releases/latest/download/wallf_darwin_arm64.tar.gz | tar xz
+sudo mv wallf /usr/local/bin/
+
+# macOS (Intel)
+curl -L https://github.com/neur0map/wallf/releases/latest/download/wallf_darwin_amd64.tar.gz | tar xz
+sudo mv wallf /usr/local/bin/
+```
+
+### Go install
+
 Requires Go 1.21+.
 
 ```
 go install github.com/neur0map/wallf@latest
 ```
 
-Or build from source:
+### From source
 
 ```
 git clone https://github.com/neur0map/wallf
@@ -42,9 +66,9 @@ go build -o wallf .
 wallf
 ```
 
-That's it. The TUI walks you through everything.
+The TUI walks you through everything.
 
-On first run, a setup wizard asks for your download directory and preferred resolution. Config is saved to `~/.config/wallf/config.toml`.
+On first run, a setup wizard asks for your download directory and preferred resolution. Config is saved to `~/.config/wallf/config.toml` (respects `$XDG_CONFIG_HOME`).
 
 ### Config
 
@@ -54,11 +78,6 @@ download_dir = "~/Pictures/Wallpapers"
 default_source = "wallhaven"
 min_resolution = "2560x1440"
 ```
-
-## Requirements
-
-- Any terminal emulator
-- Go 1.21+ for building
 
 ## License
 

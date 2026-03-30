@@ -249,6 +249,9 @@ func (a App) performSearch(sr SearchResult) tea.Cmd {
 			Subreddit: sr.Subreddit,
 		}
 		results, err := src.Search(opts)
+		if err == nil && sr.Count > 0 && len(results) > sr.Count {
+			results = results[:sr.Count]
+		}
 		return searchResultsMsg{results: results, err: err}
 	}
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/neur0map/wallf/config"
 	"github.com/neur0map/wallf/download"
-	"github.com/neur0map/wallf/preview"
 	"github.com/neur0map/wallf/source"
 )
 
@@ -32,7 +31,6 @@ type AppOpts struct {
 	Source     string
 	Count      int
 	Downloader *download.Downloader
-	Preview    *preview.Kitty
 }
 
 // DownloadRecord tracks the outcome of a single wallpaper.

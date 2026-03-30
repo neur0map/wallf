@@ -57,7 +57,7 @@ min_resolution = "2560x1440"
 
 ## Requirements
 
-- A terminal emulator (kitty, WezTerm, Ghostty, or any modern terminal)
+- Any terminal emulator
 - Go 1.21+ for building
 
 ## License

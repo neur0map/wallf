@@ -9,7 +9,6 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/neur0map/wallf/config"
 	"github.com/neur0map/wallf/download"
-	"github.com/neur0map/wallf/preview"
 	"github.com/neur0map/wallf/source"
 	"github.com/neur0map/wallf/tui"
 )
@@ -22,11 +21,6 @@ func main() {
 		flag.PrintDefaults()
 	}
 	flag.Parse()
-
-	if !preview.Supported() {
-		fmt.Fprintln(os.Stderr, "wallf requires a terminal with kitty graphics protocol support (kitty, WezTerm, Ghostty).")
-		os.Exit(1)
-	}
 
 	needWizard := !config.Exists()
 	var cfg config.Config
@@ -46,13 +40,6 @@ func main() {
 		"bing":      source.NewBing(),
 	}
 
-	prev, err := preview.New()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "preview init: %v\n", err)
-		os.Exit(1)
-	}
-	defer prev.Cleanup()
-
 	query := strings.TrimSpace(strings.Join(flag.Args(), " "))
 
 	opts := tui.AppOpts{
@@ -63,7 +50,6 @@ func main() {
 		Source:     *srcFlag,
 		Count:      *countFlag,
 		Downloader: download.New(cfg.DownloadDir(), hashIndex),
-		Preview:    prev,
 	}
 
 	p := tea.NewProgram(tui.NewApp(opts), tea.WithAltScreen())

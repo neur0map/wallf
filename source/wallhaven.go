@@ -88,6 +88,13 @@ func (w *Wallhaven) Search(opts SearchOpts) ([]WallpaperResult, error) {
 		params.Set("colors", strings.Join(opts.Colors, ","))
 	}
 
+	// Default to landscape ratios to avoid portrait/mobile images
+	if opts.Ratios != "" {
+		params.Set("ratios", opts.Ratios)
+	} else {
+		params.Set("ratios", "landscape")
+	}
+
 	reqURL := w.baseURL + "/search?" + params.Encode()
 
 	req, err := http.NewRequest("GET", reqURL, nil)
@@ -150,6 +157,7 @@ func (w *Wallhaven) SearchTotal(opts SearchOpts) (int, error) {
 	}
 	cats := categoryBits(strings.Join(opts.Categories, ","))
 	params.Set("categories", cats)
+	params.Set("ratios", "landscape")
 	if w.apiKey != "" {
 		params.Set("apikey", w.apiKey)
 	}

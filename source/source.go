@@ -32,6 +32,7 @@ type SearchOpts struct {
 	Categories []string
 	TimeRange  string
 	Colors     []string // hex colors e.g. "000000", "ffffff"
+	Ratios     string   // "landscape", "portrait", "16x9", etc.
 	// Subreddit is only meaningful for the reddit source.
 	Subreddit string
 }
